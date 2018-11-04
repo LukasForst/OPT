@@ -1,0 +1,42 @@
+\documentclass[12pt]{article}
+\usepackage[DIV=12]{typearea}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+
+
+
+\begin{document}
+\title{Metoda nejmenších čtverců}
+\author{Lukáš Forst, forstluk}
+\date{}
+\maketitle
+
+\section{První úkol}
+\textit{Jaká je hodnota $M_{2009/2}$ odhadu hrubé průměrné mzdy pro druhý kvartál roku 2009 (pro funkci odhadnutou z dat mzdy.txt)?}\newline
+
+Pro druhý kvartál roku 2009 činní odhad hrubé průměrné mzdy \textbf{23 237 Kč}.
+\section{Druhý úkol}
+
+Chtěl jsem dokázat, že platí $\hat{T}(t) = \hat{Q}(t), \forall t\in\Re$ kde 
+\begin{gather*}
+\hat{T}(t) = x_{0} + x_{1}t + x_{2}sin(\omega t) + x_{3}cos(\omega t)\\
+\hat{G}(t) = y_{0} + y_{1}t + Asin(\omega t + \phi)
+\end{gather*}
+pro $y_{0}, y_{1}, A \in \Re, \phi \in (0, 2\pi]$.\newline
+Vezmu $\hat{G}(t)$ a roznásobím, následně použiji goniometrický vzorec pro $sin(x + y)$:
+\begin{gather*}
+\hat{G}(t) = y_{0} + y_{1}t + Asin(\omega t + \phi)\\
+\hat{G}(t) = y_{0} + y_{1}t + A\cdot (sin(\omega t)cos(\phi) + cos(\omega t)sin(\phi))\\
+\hat{G}(t) = y_{0} + y_{1}t + A\cdot cos(\phi)sin(\omega t) + A\cdot sin(\phi)cos(\omega t)
+\end{gather*}
+Nyní provedu následující substituci:
+\begin{gather*}
+y_{0} = x_{0}, y_{1} = x_{1}, x_{2} = A\cdot cos(\phi), x_{3} = A\cdot sin(\phi)
+\end{gather*}
+mám tedy:
+\begin{gather*}
+\hat{G}(t) = x_{0} + x_{1}t + x_{2}sin(\omega t) + x_{3}cos(\omega t) = \hat{T}(t)\\
+\end{gather*}
+Ukázal jsem, že pro každou čtveřici $y_{0}, y_{1}, A, \phi$ existuje čtveřice $x_{0}, x_{1}, x_{2}, x_{3}$ taková, že platí $\hat{T}(t) = \hat{Q}(t), \forall t\in\Re$.
+
+\end{document}
