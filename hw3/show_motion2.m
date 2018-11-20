@@ -8,8 +8,13 @@ end
 
 %% Zde doplnte Vas kod, ktery najde aproximaci A_approx %%%%%%%%%%%%
 
-A_approx = A+50*randn(size(A));  % toto je jen pro ukazku
+r = 15;
 
+[An, n] = get_linear(A);
+[U,S,V] = compress_svd(An,r);
+
+A_approx = U*S*V';
+A_approx = A_approx' + n;
 
 %% konec Vaseho kodu %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

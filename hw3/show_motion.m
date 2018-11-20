@@ -1,4 +1,4 @@
-switch 1
+switch 2
     case 1
         A = load('makarena1.txt','-ASCII');
     case 2
