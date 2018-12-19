@@ -9,8 +9,15 @@ opts.mu = 1; % for LM
 a = [-0.7   0.7 0.7  -0.7
      -0.3  -0.3 0.8   .3]; 
 
+b = [0,0,0;0.2,0.25,.3];
+ 
 x0 = [0.5 0.2, .7]'; 
+x01 = [-1 0.25, .5]';
+x02 = [1 0.25, .5]';
 
 method = 'A';
 %method = 'GN';
-[x, f_history] = fit_circle(x0, a, method, opts)
+%[x, f_history] = fit_circle(x0, a, method, opts);
+[x, f_history] = fit_circle(x02, b, method, opts);
+figure();
+plot(0:10, f_history);

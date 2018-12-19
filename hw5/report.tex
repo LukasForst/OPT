@@ -1,0 +1,95 @@
+\documentclass[12pt]{article}
+\usepackage[DIV=12]{typearea}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,graphicx,amsfonts,booktabs,subcaption,float,bm}
+
+
+
+\begin{document}
+\title{Vzdálenost bodu od kvadriky}
+\author{Lukáš Forst, forstluk}
+\maketitle
+	\subsection*{Úloha 1: Navrhněte řešení úlohy}
+	Minimalizujeme funkci $f(x) = \|x-a\|$ na množině $x^{T}Qx = 1$. Sestrojíme
+	Lagrangovu funkci.
+	\begin{align*}
+		L(x) &= (x-a)^{T}(x-a) + \lambda(x^{T}Qx - 1)
+	\end{align*}
+	Tedy odpovídající parciální derivace jsou následující:
+	\begin{align*}
+		\frac{\partial L}{\partial x} &= 2(x-a)^T + 2\lambda x^{T}Q \\
+		\frac{\partial L}{\partial \lambda} &= x^TQx - 1
+	\end{align*}
+	Kdybychom postavily předchozí rovnice rovno $0$ a vyřešili je, tak dostaneme výsledné $x$. Bohužel jsou tyto rovnice poměrné složité vyřešit, takže provedeme spektrální rozklad a následně změnu souřadnic rovnice. \\
+	Spektrální rozklad aplikujeme na kvadriku.
+	\begin{align*}
+		x^TQx - 1 = x^TV\Lambda V^Tx - 1
+	\end{align*}
+	Následně změníme souřadnice systému.
+	\begin{align*}
+		y &= V^Tx \\
+		b &= V^Ta
+	\end{align*}
+	A tím dostaneme novou Lagrangovu funkci.
+	\begin{align*}
+		L(x) &= (y-b)^{T}(y-b) + \lambda(y^{T}Qy - 1)
+	\end{align*}
+	A její parciální derivace.
+	\begin{align*}
+		\frac{\partial L}{\partial x} &= 2(y-b)^T + 2\lambda y^{T}Q \\
+		\frac{\partial L}{\partial \lambda} &= y^{T}\Lambda y - 1
+	\end{align*}
+	Derivaci $\frac{\partial L}{\partial x}$ postavíme rovno $0$ a upravíme.
+	\begin{align*}
+		\frac{\partial L}{\partial x} = 2(y-b)^T + 2\lambda y^{T}Q &= 0\\
+		y^T(\lambda\Lambda + I) &= b^T \\
+		y &= (\lambda\Lambda + I)^{-1} \cdot b^{T}
+	\end{align*}
+	Výslednou rovnici rozepíšeme po složkách.
+	\begin{align*}
+		y &= (\lambda\Lambda + I)^{-1} \cdot b^{T} \\
+		y_i &= \frac{b_i}{\lambda\Lambda_{i,i} + 1}
+	\end{align*}
+	Derivaci $\frac{\partial L}{\partial \lambda}$ můžeme rozepsat po složkách, 
+	protože $\Lambda$ je diagonální.
+	\begin{align*}
+		y^T\Lambda y - 1&= 0 \\
+		(\sum_{i=1}^n \Lambda_{i,i}\cdot y_{i}^2) - 1 &= 0
+	\end{align*}
+	Nyní dosadíme $y$ z předchozí rovnice.
+	\begin{equation*}
+		(\sum_{i=1}^{\bm{n}} \frac{\Lambda_{i,i}b_{i}^2}{(\lambda\cdot\Lambda_{i,i} + 1)^2}) 
+		- 1 = 0
+	\end{equation*}
+	K řešení této rovnice můžeme přistoupit různě. Musíme brát zřetel na to, že 
+	pravděpodobně nebude mít přesné řešení a tedy je budeme aproximovat. 
+	Já jsem zvolil iterační metodu, konkrétněji Newtonovu, protože budeme hledat 
+	číslo a ne matici/vektor a tedy použití Gauss-Newtonovi metody nepřinese 
+	zlepšení.
+	Jedna iterace zvolené metody pak vypadá takto.
+	\begin{equation*}
+		\lambda_{k+1} = \lambda_k - (g'(\lambda_k ))^{-1}g(\lambda_k) 
+	\end{equation*}
+	Kde
+	\begin{align*}
+		g(\lambda) &= \sum_{i=1}^{n} \frac{\Lambda_{i,i}b_{i}^2}
+		{(\lambda\cdot\Lambda_{i,i} + 1)^2} - 1 \\
+		g'(\lambda) &= \sum_{i=1}^{n} \frac{-2\cdot\Lambda_{i,i}^2b_{i}^2}
+		{(\lambda\cdot\Lambda_{i,i} + 1)^3}
+	\end{align*}
+	Po skončení všech iterací (já jsem zvolil konstantu $100$) Newtonovy metody 
+	získáme bod $y$ a následně námi hledaný bod $x = Vy$. \\
+	Rozhodl jsem se nevolit pouze jeden počáteční bod, ale několik, abych zajistil,
+	že algoritmus najde nejlepší řešení. Zvolil jsem množinu $\{-1,0,1\}$ a to 
+	převážně kvůli tomu, abych se blížil k řešení jak zprava, tak zleva. \\
+	Po skončení všech cyklů Newtona jsem zvolil nejlepší $\lambda$ tak, abych
+	minimalizoval vzdálenost $\|x-a\|$.
+	\subsection*{Úloha 2: Popište jak jste funkci testovali}
+	Funkce byla testována na všech datech z poskytnutého setu $Qs, as$ a 
+	$xs$. Pro všechny iterace se sečetla celková vzdálenost $\|x_i-a_i\|$.
+	Zároveň po každé probíhalo ověření, jestli nalezený bod $x$ splňuje 
+	počáteční podmínku $x^{T}Qx = 1$. Tímto způsobem jsem benchmarkoval 
+	spolehlivost algoritmu.
+\end{document}
