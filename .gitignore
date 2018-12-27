@@ -1,6 +1,7 @@
-
+.idea/
+out/
 test_cases/
-
+SeDuMi_1_3/
 # Created by https://www.gitignore.io/api/tex,latex,matlab
 # Edit at https://www.gitignore.io/?templates=tex,latex,matlab
 
