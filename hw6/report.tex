@@ -9,11 +9,11 @@
 \usepackage[utf8]{inputenc}
 \usepackage[czech]{babel}
 \usepackage{graphicx}
+\usepackage{subcaption}
 \usepackage{float}
 \usepackage{enumitem}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{subfigure}
 \usepackage{caption}
 \usepackage{blkarray}
 \usepackage{mathtools}
@@ -26,8 +26,8 @@
 % Document
 \begin{document}
 
-    \title{Minimum fuel optimal control problem}
-    \author{Lukáš Forst, forstluk}
+    \title{Lineární programování}
+    \author{Lukáš Forst}
     \maketitle
 
     \section{Definice úlohy LP}\label{sec:definice-úlohy-lp}
@@ -122,7 +122,7 @@
     Výraz, který minimalizujeme $c^T x$
     \begin{align*}
         c^T &=
-        \left[\setlength\arraycolsep{5.5pt}
+        \left[\setlength\arraycolsep{6pt}
         \begin{array}{*{18}{c}}
             1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0
         \end{array}
@@ -143,7 +143,6 @@
     \end{align*}
     A podmínka $Ax = b$
     \begin{align*}
-        %        b^T &= [\overbrace{0, 0, -1, -1, 0, 0, -1, -1}^{\text{Pravá strana pro }z},\overbrace{0, 0, -10, 0}^{\text{pro }u}]\\
         b^T &= \left[
         \begin{array}{*{18}{c}}
             0 & 0 & -1 & -1 & 0 & 0 & -1 & -1 & 0 & 0 & -10 & 0
@@ -178,25 +177,40 @@
         b_{1} \dots b_{8} = \text{pravá strana } \mathbf{z} \text{ rovnic} \\
         b_{8} \dots b_{12} = \text{pravá strana } \mathbf{u} \text{ rovnic} \\
     \end{align*}
-%    \section{Grafy obsahující závislosti a optimální hodnota F}\label{sec:grafy-obsahující-závislosti-a-optimální-hodnota-f}
-%    Pro hodnoty
-%    \begin{align*}
-%        A = \begin{bmatrix}
-%                1 & 1\\
-%                0 & 0.95
-%        \end{bmatrix}, \enspace
-%        b = \begin{bmatrix}
-%                0 \\
-%                0.1
-%        \end{bmatrix}, \enspace
-%        x(0) = (0,0), \enspace
-%        x_{des} = (10,0), \enspace
-%        N = 20
-%    \end{align*}
-%    nalezla moje implementace řešení
-%    \begin{align*}
-%        F = 15.9119
-%    \end{align*}
-%    Grafy zobrazující závislosti $u(t), x_1(t), x_2(t)$ na $t$ pak vypadají takto
-
+    \section{Grafy obsahující závislosti a optimální hodnota F}\label{sec:grafy-obsahující-závislosti-a-optimální-hodnota-f}
+    Pro hodnoty
+    \begin{align*}
+        A = \begin{bmatrix}
+                1 & 1\\
+                0 & 0.95
+        \end{bmatrix}, \enspace
+        b = \begin{bmatrix}
+                0 \\
+                0.1
+        \end{bmatrix}, \enspace
+        x(0) = (0,0), \enspace
+        x_{des} = (10,0), \enspace
+        N = 20
+    \end{align*}
+    nalezla moje implementace řešení
+    \begin{align*}
+        F = 15.9119
+    \end{align*}
+    Grafy zobrazující závislosti $u(t), x_1(t), x_2(t)$ na $t$ pak vypadají takto
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[b]{0.5\linewidth}
+            \includegraphics[width=\linewidth]{ut_t.png}
+            \caption{Závislost $u(t)$ na $t$}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.5\linewidth}
+            \includegraphics[width=\linewidth]{x1_t.png}
+            \caption{Závislost $x_{1}(t)$ na $t$}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.5\linewidth}
+            \includegraphics[width=\linewidth]{x2_t.png}
+            \caption{Závislost $x_{2}(t)$ na $t$}
+        \end{subfigure}
+        \caption{Grafy závislostí $u(t), x_1(t), x_2(t)$ na $t$}
+    \end{figure}
 \end{document}
