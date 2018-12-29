@@ -41,7 +41,7 @@
         \end{array} \right.
     \end{align*}
     $min \sum_{t=0}^{N-1}f(u(t))$  převedeme do LP tvar s využitím podmínek pro $f(a)$.\\
-    Následující výraz bude mít tedy stejnou minimální hodnotu jako původní za zadání
+    Následující výraz bude mít tedy stejnou minimální hodnotu jako původní ze zadání
     \begin{align*}
         \text{min} \enspace & 1^T z,\enspace z \in \mathbb{R}^N\\
         \text{za podmínek} \enspace & z_t \geq u_t\\
@@ -50,7 +50,7 @@
         &z_t  \geq -2u_t-1
     \end{align*}
     Tento výraz můžeme pomocí slackových proměnných a rozložením \(u_t\) na rozdíl dvou kladných čísel převést na
-    rovnosti s proměnnými většími než 0
+    následující rovnosti
     \begin{align*}
         \text{min} \enspace 1^T z,\enspace z \in \mathbb{R}^N\\
         \text{za podmínek} \enspace z_t - u_t^+ + u_t^- - s_{t1} &= 0\\
@@ -58,7 +58,7 @@
         z_t - 2u_t^+ + 2u_t^- - s_{t3} &= -1\\
         z_t + 2u_t^+ - 2u_t^- - s_{t4} &= -1
     \end{align*}
-    Nyní převedeme na LP i výraz
+    Nyní převedeme do LP tvaru i výraz
     \begin{align*}
         x(t+1) = Ax(t) +bu(t), \enspace t = 0,\ldots,N-1
     \end{align*}
